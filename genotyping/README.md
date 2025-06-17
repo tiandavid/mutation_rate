@@ -1,4 +1,4 @@
-##Genotyping pipeline
+## Genotyping pipeline
 
 1. Trimming fastqs
    * fastp.trim.sh and run.fastp.trim.sh
@@ -45,13 +45,25 @@
       
       ```
 
-    * Minimum GQ30 filter 
+    * Minimum GQ30 filter
+      ```bash
+      bcftools view -T /global/scratch/users/davidtian/Paper3_big_one/mapping_mask/DHP.k150.chrom.genmap.pos -Oz --threads 32 mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.vcf.gz > mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.vcf.gz
+      ```
 
     * Minimum 3 reads filter (FMT/DP)
+      ```bash
+      
+      ```
 
     * Minimum and maximum site level depth filter (INFO/DP)
+      ```bash
+      
+      ```
 
-    * Maximum missingness 25% filter 
+    * Maximum missingness 25% filter
+      ```bash
+      
+      ```
 
 
 
