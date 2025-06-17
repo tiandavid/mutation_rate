@@ -42,27 +42,44 @@
 11. Additional SNP filters
     * Mappability mask
       ```bash
-      
-      ```
-
-    * Minimum GQ30 filter
-      ```bash
+      #genmap K 150 -E2 mappability > 0.5 
       bcftools view -T /global/scratch/users/davidtian/Paper3_big_one/mapping_mask/DHP.k150.chrom.genmap.pos -Oz --threads 32 mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.vcf.gz > mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.vcf.gz
       ```
 
-    * Minimum 3 reads filter (FMT/DP)
+    * Minimum genotype quality filter (GQ >= 30)
       ```bash
-      
+      #GQ>30 recode
+      bcftools filter -S. -e 'FMT/GQ<30' -Oz --threads 32 -o mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.vcf.gz mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.vcf.gz
       ```
 
-    * Minimum and maximum site level depth filter (INFO/DP)
+    * Minimum 3 reads filter (FMT/DP >= 3)
       ```bash
+      bcftools filter -S. -e 'FMT/DP<3' -Oz --threads 32 -o mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.vcf.gz mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.vcf.gz
+      ```
+
+    * Minimum and maximum site level depth filter (INFO/DP within 95th percentile)
+      ```bash
+      #assess INFO/DP
+      vcftools --gzvcf mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.vcf.gz --site-depth --out k150mappable.GQ30.min3reads
+
+      module load r/4.4.0-gcc-11.4.0
+      data <- read.table("k150mappable.GQ30.min3reads.ldepth", header = TRUE, sep = "\t")
+      sum_depth <- data[[3]]
+      quantile(sum_depth, c(0.01, 0.025, 0.5, 0.975, 0.99))
+      
+      #results
+       1%    2.5%     50%   97.5%     99% 
+       231.00  406.00 1061.00 1531.00 2132.96
+
+      #apply depth filter
+      # min 0.025 = 406, max 0.975 = 1531
+      bcftools view -e 'INFO/DP<406 || INFO/DP>1531' --threads 32 -Oz -o mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.vcf.gz mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.vcf.gz
       
       ```
 
     * Maximum missingness 25% filter
       ```bash
-      
+      bcftools view -e 'F_MISSING > 0.25' --threads 32 -Oz -o mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.maxmiss25.vcf.gz mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.vcf.gz
       ```
 
 
