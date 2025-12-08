@@ -46,15 +46,15 @@
       bcftools view -T /global/scratch/users/davidtian/Paper3_big_one/mapping_mask/DHP.k150.chrom.genmap.pos -Oz --threads 32 mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.vcf.gz > mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.vcf.gz
       ```
 
-  * Maximum missingness 25% filter
+    * Maximum missingness 25% filter
       ```bash
       bcftools view -e 'F_MISSING > 0.25' --threads 32 -Oz -o mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.maxmiss25.vcf.gz mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.vcf.gz
       ```
 
-* Minimum and maximum site level depth filter (INFO/DP within 95th percentile)
+    * Minimum and maximum site level depth filter (INFO/DP within 95th percentile)
       ```bash
       #assess INFO/DP
-  vcftools --gzvcf mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.vcf.gz --site-depth --out mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25
+      vcftools --gzvcf mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.vcf.gz --site-depth --out mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25
 
       module load r/4.4.0-gcc-11.4.0
       R
