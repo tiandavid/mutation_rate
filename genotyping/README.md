@@ -75,5 +75,15 @@
       #GQ>30 recode
       bcftools filter -S. -e 'FMT/GQ<30' -Oz --threads 32 -o mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.vcf.gz mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.vcf.gz
       ```
+    * Filter at individual level for min depth (1/3X ind mean) and max depth (2X ind mean)
+      * split.multisample.for.ROH.vcf.sh and apply.min.third.max.double.depth.ROH.vcf.filter.sh
+      ```bash
+      tabix -p vcf *.mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.vcf.gz
+
+      bcftools merge *.mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.vcf.gz -Oz -o multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.vcf.gz
+
+      tabix -p vcf multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.vcf.gz
+
+      ```
 
    
