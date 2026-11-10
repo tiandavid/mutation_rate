@@ -86,4 +86,9 @@
 
       ```
 
-   
+## Further filtering for identifying mutations
+
+  * Minimum genotype quality filter (GQ >= 30)
+
+  * Minimum genotype quality filter (GQ >= 30)
+  * Minimum genotype quality filter (GQ >= 30)
