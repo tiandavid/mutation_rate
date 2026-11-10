@@ -1,7 +1,7 @@
 ## Pipeline
 
 1. Identify autozygous segments with Bcftools/ROH
-   * mut.rate.bcftools.roh.GT30.sh
+   * mut.rate.bcftools.roh.GT30.final.sh
 
 2. Restrict results to chromosomes only
    ```bash
