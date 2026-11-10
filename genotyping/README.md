@@ -51,7 +51,7 @@
       bcftools view -e 'F_MISSING > 0.25' --threads 32 -Oz -o mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.maxmiss25.vcf.gz mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.vcf.gz
       ```
 
-    * Minimum and maximum site level depth filter (INFO/DP within 95th percentile)
+    * Minimum and maximum site level depth filter (INFO/DP within 99th percentile)
       ```bash
       #assess INFO/DP
       vcftools --gzvcf mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.vcf.gz --site-depth --out mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25
