@@ -87,8 +87,20 @@
       ```
 
 ## Further filtering for identifying mutations
+  * Subset to hets
+    ```bash
+      bcftools view -i 'GT="het"' multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.vcf.gz -Oz -o multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.hets_only.vcf.gz
+      ```
+  * QUAL Filter (>100)
+    ```bash
+     bcftools view -e 'QUAL<100' -Oz --threads 32 -o multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.hets_only.QUAL100.vcf.gz multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.hets_only.vcf.gz
+      ```
+  * Minimum genotype quality filter (GQ >= 40)
+      ```bash
+      bcftools filter -S. -e 'FMT/GQ<40' -Oz --threads 32 -o multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.hets_only.QUAL100.GQ40.vcf.gz multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.hets_only.QUAL100.vcf.gz
+      ```
+  * Minimum number of alt allele supporting reads and allelic balance (binomial test, p < 0.05)
+      * allelic.balance.filtering.sh
+      * filter_binomial.R
 
-  * Minimum genotype quality filter (GQ >= 30)
-
-  * Minimum genotype quality filter (GQ >= 30)
-  * Minimum genotype quality filter (GQ >= 30)
+  * IGV read alignment inspection
