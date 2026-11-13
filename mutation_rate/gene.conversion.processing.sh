@@ -68,4 +68,4 @@ END {
 }' all_348_mismatches_with_MAF_POPid_adult_only.tsv
 
 
-#output: gene_conversion_mut_rates_across_MAF_bins.csv
+#output for gene_conversion_mut_rates_across_MAF_bins.csv
