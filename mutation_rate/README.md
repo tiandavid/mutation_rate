@@ -50,6 +50,9 @@ Apply same pipeline just for singletons.
     grep -vFf IGV_false_positives_reordered.tsv all_mismatches_snps_only.bed > all_mismatches_snps_only_IGV_inspected.bed
     ```
   * gene.conversion.processing.sh
+ 
+Compiled data for mature adult and embryonic lethal estimated number of meioses and gene conversion corrected mutation rate
+  * adult_lethal_meioses_gene_conversion_rates.xlsx
 
 ### Plotting 
 
