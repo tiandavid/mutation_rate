@@ -27,6 +27,8 @@
         echo -e "$CHR\t$START\t$END\t$IND\tNA\tNA\tNA";  
     fi
   done >> final_autozygous_intersecting_snps_coordinates.tsv
+
+  awk -F'\t' -v OFS='\t' '{ print $5, $6, $7 > ($4 ".intersecting.snp.coord.bed") }' ../final_autozygous_intersecting_snps_coordinates.tsv
   ```
 
 
