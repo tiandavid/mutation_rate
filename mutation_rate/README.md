@@ -2,7 +2,7 @@
 
 
 
-
+* False positives found by checking read alignments with IGV-reports: IGV_false_positives.txt
 
 ### Plotting 
 
