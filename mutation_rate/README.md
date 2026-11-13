@@ -5,7 +5,17 @@
   awk -F'\t' 'BEGIN {OFS="\t"} {if (NR>0) {start=$4+1000000; end=($5-1000000>start) ? $5-1000000 : start; print $3, start, end, $2}}' multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.sorted_GTonly_RG_ONLY.CHR_ONLY_5Mb_min.txt > final.1Mb.cutoff.bed
   ```
 
-* False positives found by checking read alignments with IGV-reports: IGV_false_positives.txt
+* Make a directory and generate a bed file per segment
+  ```bash
+  mkdir final_split_bed_files
+  cd final_split_bed_files
+  awk '{print > $1"_"$2"_"$3"_"$4".bed"}' ../final.1Mb.cutoff.bed
+  ```
+* Split mutation VCF into ind VCF to make it easier to intersect segments and het variants in each individual.
+  * final.split.ind.vcf.sh
+
+
+* False positives found by checking read alignments with   IGV-reports: IGV_false_positives.txt
 
 ### Plotting 
 
