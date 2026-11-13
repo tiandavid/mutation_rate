@@ -31,8 +31,13 @@
   awk -F'\t' -v OFS='\t' '{ print $5, $6, $7 > ($4 ".intersecting.snp.coord.bed") }' ../final_autozygous_intersecting_snps_coordinates.tsv
   ```
 
-
-* False positives found by checking read alignments with   IGV-reports: IGV_false_positives.txt
+* False positives found by checking read alignments with IGV-reports - see ../genotyping to see how these igv-reports was run.
+  * IGV_false_positives.txt
+ 
+* Remove false positives
+  ```bash
+  awk -F'\t' 'NR==FNR { seen[$1,$2,$3,$4]; next } !(($4,$5,$6,$7) in seen)' IGV_false_positives.tsv final_autozygous_intersecting_snps_coordinates.tsv | cut -f5-7 > final_autozygous_intersecting_snps_coordinates_IGV_checked.tsv
+  ```
 
 ### Plotting 
 
