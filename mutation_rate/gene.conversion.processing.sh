@@ -66,6 +66,3 @@ END {
   for(i=100;i<=500;i+=25)
     printf "≤%.3f\t%d\n", i/1000, c[i]+0
 }' all_348_mismatches_with_MAF_POPid_adult_only.tsv
-
-
-#output for gene_conversion_mut_rates_across_MAF_bins.csv
