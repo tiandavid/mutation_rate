@@ -18,6 +18,6 @@
   
 5. Get stats and make histogram to visualize segment size distribution
    * GT_ROH.GQ30.segment.distribution.5Mb.stats.final.py
-   * auto.seg.size.histogram.py
+   * auto.seg.size.histogram.py (make Fig. for 1E)
   
   
