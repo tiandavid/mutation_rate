@@ -39,6 +39,10 @@
   awk -F'\t' 'NR==FNR { seen[$1,$2,$3,$4]; next } !(($4,$5,$6,$7) in seen)' IGV_false_positives.tsv final_autozygous_intersecting_snps_coordinates.tsv | cut -f5-7 > final_autozygous_intersecting_snps_coordinates_IGV_checked.tsv
   ```
 
+Apply same pipeline just for singletons.
+
+* Gene conversion - 
+
 ### Plotting 
 
 * Input data: gene_conversion_mut_rates_across_MAF_bins.csv, singleton_rates_final.csv
