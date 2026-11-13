@@ -104,3 +104,5 @@
       * filter_binomial.R
 
   * IGV read alignment inspection
+      * IGV_reports_intersecting_snps.sh
+
