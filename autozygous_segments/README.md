@@ -5,13 +5,11 @@
 
 2. Restrict results to chromosomes only
    ```bash
-   grep -v "Sca" mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.maxmiss25.sorted_GTonly_RG_ONLY.txt > 
-   mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.maxmiss25.sorted_GTonly_RG_ONLY_CHR_ONLY.txt
+   grep -v "Sca" multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.sorted_GTonly_RG_ONLY.txt > multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.sorted_GTonly_RG_ONLY.CHR_ONLY.txt
    ```
 3. Restrict results to segments >= 5 Mb
    ```bash
-   awk -F'\t' '$6 >= 5000000' mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.maxmiss25.sorted_GTonly_RG_ONLY_CHR_ONLY.txt > 
-   mut.rate.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.GQ30.min3reads.95.percentile.depth.maxmiss25.sorted_GTonly_RG_ONLY_CHR_ONLY_5Mb_min.txt
+   awk -F'\t' '$6 >= 5000000' multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.sorted_GTonly_RG_ONLY.CHR_ONLY.txt > multisample.postBQSR.biallelic.HARD.FILTER.EXCLUDED.SNPS.k150mappable.maxmiss25.99depth.GQ30.min.third.max.double.filtered.sorted_GTonly_RG_ONLY.CHR_ONLY_5Mb_min.txt
    ```
 4. Split results into into individual results
    * separate.GT.ROH_regions_5Mb_final.py
