@@ -41,7 +41,14 @@
 
 Apply same pipeline just for singletons.
 
-* Gene conversion - 
+* Gene conversion
+  * collect.mismatches.sh
+    ```bash
+    cat *_intersect.bed | cut -f1-3 > all_mismatches_snps_only.bed
+    #reorder columns and remove IGV false positives
+    awk 'BEGIN{FS=OFS="\t"} {print $2, $3, $4, $1}' /global/scratch/users/davidtian/mutation_project/autozygous_segs/IGV_false_positives.tsv > IGV_false_positives_reordered.tsv
+    grep -vFf IGV_false_positives_reordered.tsv all_mismatches_snps_only.bed > all_mismatches_snps_only_IGV_inspected.bed
+    ```
 
 ### Plotting 
 
