@@ -11,8 +11,12 @@
   cd final_split_bed_files
   awk '{print > $1"_"$2"_"$3"_"$4".bed"}' ../final.1Mb.cutoff.bed
   ```
-* Split mutation VCF into ind VCF to make it easier to intersect segments and het variants in each individual.
+* Split mutation VCF into ind VCF / .bed to make it easier to intersect segments and het variants in each individual.
   * final.split.ind.vcf.sh
+  * convert into .bed format
+    ```bash
+    for vcf in final_individual_vcfs/*_het.vcf.gz; do zcat "$vcf" | awk '!/^#/ {print $1, $2-1, $2}' OFS="\t" > "final_individual_beds/$(basename "$vcf" .vcf.gz).bed"; done
+    ```
 
 
 * False positives found by checking read alignments with   IGV-reports: IGV_false_positives.txt
