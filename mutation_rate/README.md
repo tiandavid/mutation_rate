@@ -49,7 +49,7 @@ Apply same pipeline just for singletons.
     awk 'BEGIN{FS=OFS="\t"} {print $2, $3, $4, $1}' /global/scratch/users/davidtian/mutation_project/autozygous_segs/IGV_false_positives.tsv > IGV_false_positives_reordered.tsv
     grep -vFf IGV_false_positives_reordered.tsv all_mismatches_snps_only.bed > all_mismatches_snps_only_IGV_inspected.bed
     ```
-  * gene.conversion.sh
+  * gene.conversion.processing.sh
 
 ### Plotting 
 
