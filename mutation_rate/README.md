@@ -17,6 +17,17 @@
     ```bash
     for vcf in final_individual_vcfs/*_het.vcf.gz; do zcat "$vcf" | awk '!/^#/ {print $1, $2-1, $2}' OFS="\t" > "final_individual_beds/$(basename "$vcf" .vcf.gz).bed"; done
     ```
+* Use bedtools to intersect het snps with autozygous segments to get putative mutations
+  ```bash
+  awk '{print $1, $2, $3, $4}' OFS="\t" final.1Mb.cutoff.bed | while IFS=$'\t' read -r CHR START END IND; do 
+    BED_FILE="final_individual_beds/${IND}_het.bed"; 
+    if [[ -f "$BED_FILE" ]]; then 
+        bedtools intersect -a <(echo -e "$CHR\t$START\t$END") -b "$BED_FILE" | awk -v chr="$CHR" -v start="$START" -v end="$END" -v ind="$IND" '{print chr, start, end, ind, $0}' OFS="\t"; 
+    else 
+        echo -e "$CHR\t$START\t$END\t$IND\tNA\tNA\tNA";  
+    fi
+  done >> final_autozygous_intersecting_snps_coordinates.tsv
+  ```
 
 
 * False positives found by checking read alignments with   IGV-reports: IGV_false_positives.txt
