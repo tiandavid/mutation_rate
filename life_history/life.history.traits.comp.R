@@ -14,7 +14,7 @@ library(phytools)
 library(caper)
 
 
-#Load data
+#load data
 data <- read_csv("final_bergeron_life_history_revision.csv")
 data_no_DHP <- data[data$species_name != "Cyprinodon_diabolis", ]
 highlight_individual <- "Cyprinodon_diabolis"  
@@ -301,9 +301,23 @@ summary(model.2)
 #Brownian lambda = 1, Pagels allows for 0-1. if zero, then, Pagels = OLS
 
 #comparing DHP mutation rate to data from de Manuel et al. 2026. 
-dat <- read.csv("deManuel_data_supp_table1_with_DHP.csv")      # columns: label, taxon, mutation_rate, generation_time
+dat <- read.csv("deManuel_data_supp_table1_with_DHP.csv")
 dat$species <- gsub(" ", "_", dat$species) #add underscores
-setdiff(pruned$tip.label, dat$species)   #sanity check
+setdiff(pruned$tip.label, dat$species)
+
+
+deManuel_tree <- read.tree("deManuel_Fig1_species_with_DHP.nwk") #has additional nodes from tree of life that need to be pruned
+plot(deManuel_tree, no.margin = TRUE, font = 3, cex = .75)
+mine <- readLines("deManuel_Fig1_species_with_DHP_underscore.txt")
+length(deManuel_tree$tip.label) #78 tips
+setdiff(deManuel_tree$tip.label, mine) #see species in the tree I don't want
+#keep the first tip for each species if there are multiple
+genus_species <- sapply(strsplit(deManuel_tree$tip.label, "_"), function(x) paste(x[1:2], collapse = "_"))
+keep_idx <- which(genus_species %in% mine & !duplicated(genus_species))
+pruned <- keep.tip(deManuel_tree, deManuel_tree$tip.label[keep_idx])
+pruned$tip.label <- sapply(strsplit(pruned$tip.label, "_"),function(x) paste(x[1:2], collapse = "_"))
+plot(pruned, no.margin = TRUE, font = 3, cex = .75)
+
 
 taxon_cols <- c(mammals = "#009E73", fish = "blue", arthropods = "#D55E00",
                 birds = "#E69F00", reptiles = "#CC79A7", worms = "#56B4E9")
